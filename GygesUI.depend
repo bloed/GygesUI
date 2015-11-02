@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1446327563 source:c:\users\josue\documents\tec\4 semestre\lenguajes de programación\progras\8 - c\gygesui\main.c
+1446498324 source:c:\users\josue\documents\tec\4 semestre\lenguajes de programación\progras\8 - c\gygesui\main.c
 	<stdlib.h>
+	"SWI-Prolog.h"
 	<gtk/gtk.h>
 
 1328758498 c:\gtk - 2.24\include\gtk-2.0\gtk\gtk.h
@@ -2246,4 +2247,10 @@
 
 1328758500 c:\gtk - 2.24\include\gtk-2.0\gtk\gtktipsquery.h
 	<gtk/gtk.h>
+
+1440503260 c:\users\josue\documents\tec\4 semestre\lenguajes de programación\progras\8 - c\gygesui\swi-prolog.h
+	<stdarg.h>
+	<stdlib.h>
+	<stddef.h>
+	<inttypes.h>
 
