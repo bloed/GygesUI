@@ -18,6 +18,7 @@ int tablero[6][6]  = {{0,0,0,0,0,0},
 
 int main (int argc, char *argv[])
 {
+    escribeBitacora("------Nuevo Juego------");
     printf("Selecciona quien comienza: i (infierno) o c (cielo) \n");
     char turnoInicial[1];
     scanf("%s", &turnoInicial);
@@ -104,7 +105,8 @@ void juegoPrincipal(int jugadorActual){
         else if(strcmp(desicion,"1") ==0){/*juega IA*/
             if(contador <12){/*estamos en etapas iniciales*/
                 /*se pone pieza en tablero*/
-                /*putImagen(fil,col,ficha)*/
+                putImagen(3,3,3);
+                moveImagen(3, 3, 5, 5);
                 contador++;
             }
             else{
@@ -168,11 +170,12 @@ putImagen(int fil, int col, int ficha){
     int y = 202 + (fil*48);
     GtkWidget *fichaImagen = gtk_image_new ();/*creamos la imagen en blanco*/
     gtk_image_set_from_file (fichaImagen,fichac);/*la cargamos del filename*/
-    gtk_fixed_put (contenedor,fichaImagen,x,y);/*lo ponemos en el contenedor en la posicion*/
+    gtk_fixed_put (contenedor,fichaImagen,x,y);/*lo ponemos en el contenedor en la posicion. HAY WARNING*/
     gtk_widget_show (contenedor);/*mostramos el contenedor con todos los widgets*/
     gtk_widget_show_all (mainWindow);
     matrizImagenes[fil][col] = fichaImagen;/*ponemos el puntero de la imagen en su determinada posicion*/
     tablero[fil][col] = ficha;/*actualizamos tambien la matriz lógica*/
+    escribeBitacora1(fil, col, ficha, gtk_label_get_text (labelJugador));
 }
 
 /*mueve una imagen en el tablero, dada una coordenada a otra*/
@@ -181,8 +184,12 @@ moveImagen(int filOrigen, int colOrigen, int filDestino, int colDestino){
     int y = 202 + (filDestino*48);
     GtkWidget *fichaImagen = matrizImagenes[filOrigen][colOrigen];/*agarramos el puntero de imagen a esa zona*/
     gtk_fixed_put (contenedor,fichaImagen,x,y);/*lo ponemos en el contenedor en la posicion*/
+    gtk_widget_show (contenedor);/*mostramos el contenedor con todos los widgets*/
+    gtk_widget_show_all (mainWindow);
     matrizImagenes[filOrigen][colOrigen] = 0;/*ahora en esa zona de memoria no hay "nada"*/
+    int pieza = tablero[filOrigen][colOrigen];/*guardamos la pieza para no perderla para escribir la bitacora*/
     tablero[filOrigen][colOrigen] = 0;/*ahora en esa zona de memoria no hay "nada"*/
+    escribeBitacora2(filOrigen, colOrigen, filDestino , colDestino, pieza, gtk_label_get_text (labelJugador));
 }
 
 
@@ -199,5 +206,40 @@ void print_array(int a[6][6]) {
    printf("\n");
 }
 
+/*escribe en la bitacora un string x*/
+escribeBitacora(char* string){
+    FILE *archivo = fopen("Bitacora.txt", "a");
+    if (archivo == NULL)
+    {
+        printf("Error opening file!\n");
+    }
+    else{
+       fprintf(archivo, "%s\n", string);
+       fclose(archivo);
+    }
+}
+/*escribe en la bitacora, si se puso una pieza*/
+escribeBitacora1(int fil, int col, int pieza, char* jugador){
+    FILE *archivo = fopen("Bitacora.txt", "a");
+    if (archivo == NULL)
+    {
+        printf("Error!\n");
+    }
+    else{
+       fprintf(archivo, "%s puso una pieza en la fila %d y columna %d, la pieza era de tipo %d.\n", jugador,fil,col,pieza);
+       fclose(archivo);
+    }
+}
+escribeBitacora2(int fil, int col,int fil1,int col2, int pieza, char* jugador){
+    FILE *archivo = fopen("Bitacora.txt", "a");
+    if (archivo == NULL)
+    {
+        printf("Error!\n");
+    }
+    else{
+       fprintf(archivo, "%s movio de la fila %d y columna %d una pieza de tipo %d, a una fila %d y columna %d.\n", jugador,fil,col,pieza,fil1,col2);
+       fclose(archivo);
+    }
+}
 
 

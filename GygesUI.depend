@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1446503314 source:c:\users\josue\documents\tec\4 semestre\lenguajes de programación\progras\8 - c\gygesui\main.c
+1446504716 source:c:\users\josue\documents\tec\4 semestre\lenguajes de programación\progras\8 - c\gygesui\main.c
 	<stdlib.h>
 	"SWI-Prolog.h"
 	<gtk/gtk.h>
