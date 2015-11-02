@@ -4,8 +4,17 @@
 
 
 GtkWidget *mainWindow;/*creamos la pantalla global*/
-GtkWidget  *labelJugador;/*será el label que contiene el jugador actual*/
+GtkWidget *labelJugador;/*será el label que contiene el jugador actual*/
+GtkWidget *contenedor; /*contenedor de imagenes*/
 /*gyges([f3,f2,f3,f0,f0,f0,f1,f0,f0,f0,f0,f0,f1,f0,f1,f3,f0,f0,f0,f2,f0,f0,f2,f3,f0,f0,f2,f0,f0,f1,f0,f0,f0,f0,f0,f0],X,Actual,Pasada, p2).*/
+GtkWidget *matrizImagenes[6][6] = {{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0}};/*inicializada en 0*/
+int tablero[6][6]  = {{0,0,0,0,0,0},
+                      {0,0,0,0,0,0},
+                      {0,0,0,0,0,0},
+                      {0,0,0,0,0,0},
+                      {0,0,0,0,0,0},
+                      {0,0,0,0,0,0}
+                     };/*inicializada en 0*/
 
 int main (int argc, char *argv[])
 {
@@ -24,6 +33,7 @@ int main (int argc, char *argv[])
     else{
         printf("Opcion incorrecta");
     }
+    print_array(tablero);
     return 0;
 }
 /*si jugador = 0 comienza cielo, si no comienza infierno*/
@@ -36,7 +46,7 @@ void pantallaPrincipal(int jugador)
     gtk_window_set_default_size(GTK_WINDOW(mainWindow), 775, 600);
 
 
-    GtkWidget *contenedor = gtk_fixed_new ();/*creamos un contenedor donde pondremos todos los widgets*/
+    contenedor = gtk_fixed_new ();/*creamos un contenedor donde pondremos todos los widgets*/
     gtk_container_add (GTK_CONTAINER (mainWindow), contenedor);/*lo añadimos a la pantalla*/
 
     GtkWidget *label;/*creamos un label*/
@@ -81,6 +91,7 @@ void iniciarGtk(int argc, char *argv[])
 void juegoPrincipal(int jugadorActual){
     int control = 0;
     char desicion[20],movimiento[20];
+    int contador = 0;
 
     while (control == 0) {
         while ( gtk_events_pending() ) gtk_main_iteration();
@@ -91,13 +102,33 @@ void juegoPrincipal(int jugadorActual){
             control = 1;
         }
         else if(strcmp(desicion,"1") ==0){/*juega IA*/
+            if(contador <12){/*estamos en etapas iniciales*/
+                /*se pone pieza en tablero*/
+                /*putImagen(fil,col,ficha)*/
+                contador++;
+            }
+            else{
+                /*tiene que hacer ya movimientos tuanis*/
+                /*moveImagen(filOrigen, colOrigen, filDestino, colDestino);*/
+            }
             siguienteTurno();
         }
         else if(strcmp(desicion,"2") ==0){/*juega Humano*/
-            printf("Ingresa el movimiento a realizar: \n");
-            scanf("%s", &movimiento);
             /*ahora hay que ver si es un moviiento valido, si si se meuve, si no no pasa nada*/
             /*muestraMensaje(mainWindow,"Movimiento ilegal. Juegue bien!");*/
+            if(contador <12){/*estamos en etapas iniciales*/
+                /*se pone pieza en tablero,basado en lo que el usuario escribio*/
+                /*putImagen(fil,col,ficha)*/
+                printf("Que ficha y dónde la quiere poner: \n");
+                scanf("%s", &movimiento);
+                contador++;
+            }
+            else{
+                printf("Qué ficha y a donde la quiere mover: \n");
+                scanf("%s", &movimiento);
+                /*tiene que hacer ya movimientos tuanis, basado en lo que el usuario escribio*/
+                /*moveImagen(filOrigen, colOrigen, filDestino, colDestino);*/
+            }
             siguienteTurno();
         }
         else
@@ -129,6 +160,44 @@ void muestraMensaje(GtkWidget *pantallaPadre, char* mensaje)
      gtk_widget_destroy (pantallita);
 }
 
+/*pone una imagen en pantalla en fila y columna dada. Ficha debe ser 1,2,3*/
+putImagen(int fil, int col, int ficha){
+    char fichac[15];
+    sprintf(fichac, "%d.png", ficha);
+    int x = 162 + (col*48);
+    int y = 202 + (fil*48);
+    GtkWidget *fichaImagen = gtk_image_new ();/*creamos la imagen en blanco*/
+    gtk_image_set_from_file (fichaImagen,fichac);/*la cargamos del filename*/
+    gtk_fixed_put (contenedor,fichaImagen,x,y);/*lo ponemos en el contenedor en la posicion*/
+    gtk_widget_show (contenedor);/*mostramos el contenedor con todos los widgets*/
+    gtk_widget_show_all (mainWindow);
+    matrizImagenes[fil][col] = fichaImagen;/*ponemos el puntero de la imagen en su determinada posicion*/
+    tablero[fil][col] = ficha;/*actualizamos tambien la matriz lógica*/
+}
+
+/*mueve una imagen en el tablero, dada una coordenada a otra*/
+moveImagen(int filOrigen, int colOrigen, int filDestino, int colDestino){
+    int x = 162 + (colDestino*48);
+    int y = 202 + (filDestino*48);
+    GtkWidget *fichaImagen = matrizImagenes[filOrigen][colOrigen];/*agarramos el puntero de imagen a esa zona*/
+    gtk_fixed_put (contenedor,fichaImagen,x,y);/*lo ponemos en el contenedor en la posicion*/
+    matrizImagenes[filOrigen][colOrigen] = 0;/*ahora en esa zona de memoria no hay "nada"*/
+    tablero[filOrigen][colOrigen] = 0;/*ahora en esa zona de memoria no hay "nada"*/
+}
+
+
+/*solo para debug*/
+void print_array(int a[6][6]) {
+   int i, j;
+   /* print each row of the array */
+   for (i = 0; i < 6; i++) {
+      for (j = 0; j < 6; j++)
+         printf("%6i ", a[i][j]);
+          /* must add newline at end */
+      printf("\n");
+   }
+   printf("\n");
+}
 
 
 
