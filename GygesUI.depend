@@ -2254,3 +2254,14 @@
 	<stddef.h>
 	<inttypes.h>
 
+1446579898 source:c:\users\josué\documents\tec\4 semestre\lenguajes de programación\progras\8 - c\gygesui\main.c
+	<stdlib.h>
+	"SWI-Prolog.h"
+	<gtk/gtk.h>
+
+1446564529 c:\users\josué\documents\tec\4 semestre\lenguajes de programación\progras\8 - c\gygesui\swi-prolog.h
+	<stdarg.h>
+	<stdlib.h>
+	<stddef.h>
+	<inttypes.h>
+

@@ -5,10 +5,14 @@
 int mapeo (char);
 int verificaEntrada(int, int, int);
 int verificaEntrada2(int, int, int, int);
+char* intToF(int);
+
 
 GtkWidget *mainWindow;/*creamos la pantalla global*/
 GtkWidget *labelJugador;/*será el label que contiene el jugador actual*/
 GtkWidget *contenedor; /*contenedor de imagenes*/
+char tableroAdrian[6][6][3];/*es de 3 dimensiones, las 2 normales, + el string*/
+
 /*gyges([f3,f2,f3,f0,f0,f0,f1,f0,f0,f0,f0,f0,f1,f0,f1,f3,f0,f0,f0,f2,f0,f0,f2,f3,f0,f0,f2,f0,f0,f1,f0,f0,f0,f0,f0,f0],X,Actual,Pasada, p2).*/
 GtkWidget *matrizImagenes[6][6] = {{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0}};/*inicializada en 0*/
 int tablero[6][6]  = {{0,0,0,0,0,0},
@@ -19,10 +23,6 @@ int tablero[6][6]  = {{0,0,0,0,0,0},
                       {0,0,0,0,0,0}
                      };/*inicializada en 0*/
 
-
-func(){
-    printf("wtf!");
-}
 
 int main (int argc, char *argv[])
 {
@@ -42,7 +42,7 @@ int main (int argc, char *argv[])
     else{
         printf("Opcion incorrecta");
     }
-    print_array(tablero);
+    imprimeTableroAdrian();
     return 0;
 }
 /*si jugador = 0 comienza cielo, si no comienza infierno*/
@@ -331,5 +331,41 @@ int verificaEntrada2(int fil, int col, int fil2, int col2){
     else{
         return 2;
     }
+}
+
+/*Psamos un entero 2 a la forma "f2"*/
+char* intToF(int entero){
+    char resultado[3];
+    sprintf(resultado, "f%d", entero);
+    printf("%s", resultado);
+    return resultado;
+}
+
+/*pasamos un tablero de arreglos de enteros, a uno especializado*/
+void toArrayAdrian(int tablero[6][6]){
+   int i, j;
+   int k = 0;
+   char stringTemporal[3];
+   for (i = 0; i < 6; i++) {
+       for (j = 0; j < 6; j++){
+           sprintf(stringTemporal, "f%d", tablero[i][j]);/*agarramos el entero, y le metemos un f adelante de este*/
+           tableroAdrian[i][j][0] = stringTemporal[0];
+           tableroAdrian[i][j][1] = stringTemporal[1];
+           tableroAdrian[i][j][2] = stringTemporal[2];
+       }
+   }
+}
+
+/*proposito de debug, imprime el tablero especializado f0,f1,.. en pantalla*/
+void imprimeTableroAdrian(){
+    toArrayAdrian(tablero);
+    int i,j;
+    for (i = 0; i < 6; i++) {
+       for (j = 0; j < 6; j++){
+           printf("%s ",tableroAdrian[i][j]);
+       }
+       printf("\n");
+   }
+   printf("\n");
 }
 

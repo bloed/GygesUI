@@ -169,3 +169,4 @@ Cielo puso una pieza en la fila 0 y columna 4, la pieza era de tipo 2.
 Infierno puso una pieza en la fila 5 y columna 0, la pieza era de tipo 3.
 Cielo movio de la fila 0 y columna 0 una pieza de tipo 1, a una fila 1 y columna 0.
 Infierno movio de la fila 1 y columna 0 una pieza de tipo 1, a una fila 0 y columna 0.
+------Nuevo Juego------
