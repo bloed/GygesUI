@@ -62,3 +62,93 @@ Cielo puso una pieza en la fila 3 y columna 3, la pieza era de tipo 3.
 ------Nuevo Juego------
 Infierno puso una pieza en la fila 3 y columna 3, la pieza era de tipo 3.
 Infierno movio de la fila 3 y columna 3 una pieza de tipo 3, a una fila 5 y columna 5.
+------Nuevo Juego------
+------Nuevo Juego------
+Infierno puso una pieza en la fila 3 y columna 3, la pieza era de tipo 3.
+Infierno movio de la fila 3 y columna 3 una pieza de tipo 3, a una fila 5 y columna 5.
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 49, la pieza era de tipo 2.
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 48, la pieza era de tipo 1.
+------Nuevo Juego------
+Infierno puso una pieza en la fila 0 y columna 48, la pieza era de tipo 1.
+------Nuevo Juego------
+Infierno puso una pieza en la fila 0 y columna 48, la pieza era de tipo 1.
+------Nuevo Juego------
+------Nuevo Juego------
+------Nuevo Juego------
+------Nuevo Juego------
+------Nuevo Juego------
+------Nuevo Juego------
+------Nuevo Juego------
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 0, la pieza era de tipo -46.
+Infierno puso una pieza en la fila 0 y columna 2, la pieza era de tipo -46.
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 0, la pieza era de tipo 2.
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 0, la pieza era de tipo 51.
+------Nuevo Juego------
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 1, la pieza era de tipo 2.
+Infierno puso una pieza en la fila 5 y columna 0, la pieza era de tipo 1.
+Cielo puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+Infierno puso una pieza en la fila 5 y columna 1, la pieza era de tipo 2.
+Cielo puso una pieza en la fila 0 y columna 5, la pieza era de tipo 3.
+Infierno puso una pieza en la fila 5 y columna 3, la pieza era de tipo 3.
+Cielo puso una pieza en la fila 0 y columna 4, la pieza era de tipo 3.
+Infierno puso una pieza en la fila 5 y columna 3, la pieza era de tipo 3.
+------Nuevo Juego------
+Infierno puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+Cielo movio de la fila 0 y columna 0 una pieza de tipo 1, a una fila 6 y columna -176.
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+Cielo movio de la fila 0 y columna 0 una pieza de tipo 1, a una fila 6 y columna -176.
+Infierno movio de la fila 0 y columna 0 una pieza de tipo 0, a una fila 5 y columna 5.
+------Nuevo Juego------
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+Infierno movio de la fila 0 y columna 0 una pieza de tipo 1, a una fila 5 y columna 5.
+Cielo movio de la fila 5 y columna 5 una pieza de tipo 0, a una fila 1 y columna 3.
+Infierno movio de la fila 5 y columna 5 una pieza de tipo 0, a una fila 0 y columna 0.
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+Cielo movio de la fila 0 y columna 0 una pieza de tipo 1, a una fila 1 y columna 1.
+------Nuevo Juego------
+Infierno puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+Infierno movio de la fila 0 y columna 0 una pieza de tipo 1, a una fila 1 y columna 1.
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+Cielo movio de la fila 0 y columna 0 una pieza de tipo 1, a una fila 1 y columna 1.
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+Cielo movio de la fila 0 y columna 0 una pieza de tipo 1, a una fila 1 y columna 1.
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+Cielo movio de la fila 0 y columna 0 una pieza de tipo 1, a una fila 1 y columna 1.
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+Cielo movio de la fila 0 y columna 0 una pieza de tipo 1, a una fila 1 y columna 1.
+------Nuevo Juego------
+Infierno puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+Cielo movio de la fila 0 y columna 0 una pieza de tipo 1, a una fila 5 y columna 5.
+Infierno movio de la fila 5 y columna 5 una pieza de tipo 0, a una fila 0 y columna 0.
+------Nuevo Juego------
+Cielo puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+Infierno movio de la fila 0 y columna 0 una pieza de tipo 1, a una fila 5 y columna 5.
+Cielo movio de la fila 5 y columna 5 una pieza de tipo 1, a una fila 1 y columna 1.
+Infierno movio de la fila 1 y columna 1 una pieza de tipo 1, a una fila 0 y columna 0.
+------Nuevo Juego------
+Infierno puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+------Nuevo Juego------
+Infierno puso una pieza en la fila 0 y columna 0, la pieza era de tipo 1.
+Cielo movio de la fila 0 y columna 0 una pieza de tipo 1, a una fila 1 y columna 1.
+Infierno movio de la fila 1 y columna 1 una pieza de tipo 1, a una fila 5 y columna 5.
+Cielo movio de la fila 5 y columna 5 una pieza de tipo 1, a una fila 0 y columna 0.
+Infierno movio de la fila 0 y columna 0 una pieza de tipo 1, a una fila 5 y columna 0.
+Cielo movio de la fila 5 y columna 0 una pieza de tipo 1, a una fila 0 y columna 5.
+Infierno movio de la fila 0 y columna 5 una pieza de tipo 1, a una fila 4 y columna 4.

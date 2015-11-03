@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include "SWI-Prolog.h"
 #include <gtk/gtk.h>
-
+/*PROTOTIPOS*/
+int mapeo (char);
 
 GtkWidget *mainWindow;/*creamos la pantalla global*/
 GtkWidget *labelJugador;/*será el label que contiene el jugador actual*/
@@ -15,6 +16,11 @@ int tablero[6][6]  = {{0,0,0,0,0,0},
                       {0,0,0,0,0,0},
                       {0,0,0,0,0,0}
                      };/*inicializada en 0*/
+
+
+func(){
+    printf("wtf!");
+}
 
 int main (int argc, char *argv[])
 {
@@ -94,6 +100,13 @@ void juegoPrincipal(int jugadorActual){
     char desicion[20],movimiento[20];
     int contador = 0;
 
+    int columna;
+    int fila;
+    int pieza;
+    int fila2;
+    int columna2;
+    putImagen(0,0,1);
+
     while (control == 0) {
         while ( gtk_events_pending() ) gtk_main_iteration();
         printf("\nSelecciona una opción: \n 0. Salir \n 1. Juega IA \n 2. Juega Persona\n");
@@ -105,8 +118,8 @@ void juegoPrincipal(int jugadorActual){
         else if(strcmp(desicion,"1") ==0){/*juega IA*/
             if(contador <12){/*estamos en etapas iniciales*/
                 /*se pone pieza en tablero*/
-                putImagen(3,3,3);
-                moveImagen(3, 3, 5, 5);
+                /*putImagen(3,3,3);
+                moveImagen(3, 3, 5, 5);*/
                 contador++;
             }
             else{
@@ -120,18 +133,27 @@ void juegoPrincipal(int jugadorActual){
             /*muestraMensaje(mainWindow,"Movimiento ilegal. Juegue bien!");*/
             if(contador <12){/*estamos en etapas iniciales*/
                 /*se pone pieza en tablero,basado en lo que el usuario escribio*/
-                /*putImagen(fil,col,ficha)*/
-                printf("Que ficha y dónde la quiere poner: \n");
+                printf("Que ficha y dónde la quiere poner: (Ejemplo: a1_2   en la posición a1 poner una pieza de 2).\n");
                 scanf("%s", &movimiento);
+                pieza = (int)movimiento[3]- '0';
+                columna = (int)movimiento[1] - '0';
+                fila = mapeo (movimiento[0]);
+                putImagen(fila,columna,pieza);
                 contador++;
+                siguienteTurno();
             }
             else{
-                printf("Qué ficha y a donde la quiere mover: \n");
+                printf("Qué ficha y a donde la quiere mover:(Ejemplo: a0_f3   esto es mover la pieza en la casilla a0 a f3). \n");
                 scanf("%s", &movimiento);
                 /*tiene que hacer ya movimientos tuanis, basado en lo que el usuario escribio*/
-                /*moveImagen(filOrigen, colOrigen, filDestino, colDestino);*/
+                fila = mapeo(movimiento[0]);
+                columna = (int)movimiento[1] - '0';
+                fila2 = mapeo (movimiento[3]);
+                columna2 = (int)movimiento[4] - '0';
+                printf("%d%d_%d%d",fila,columna,fila2,columna2);
+                moveImagen(fila, columna, fila2, columna2);
+                siguienteTurno();
             }
-            siguienteTurno();
         }
         else
         {
@@ -170,7 +192,7 @@ putImagen(int fil, int col, int ficha){
     int y = 202 + (fil*48);
     GtkWidget *fichaImagen = gtk_image_new ();/*creamos la imagen en blanco*/
     gtk_image_set_from_file (fichaImagen,fichac);/*la cargamos del filename*/
-    gtk_fixed_put (contenedor,fichaImagen,x,y);/*lo ponemos en el contenedor en la posicion. HAY WARNING*/
+    gtk_fixed_put (contenedor,fichaImagen,x,y);/*lo ponemos en el contenedor en la posicion.*/
     gtk_widget_show (contenedor);/*mostramos el contenedor con todos los widgets*/
     gtk_widget_show_all (mainWindow);
     matrizImagenes[fil][col] = fichaImagen;/*ponemos el puntero de la imagen en su determinada posicion*/
@@ -183,15 +205,26 @@ moveImagen(int filOrigen, int colOrigen, int filDestino, int colDestino){
     int x = 162 + (colDestino*48);
     int y = 202 + (filDestino*48);
     GtkWidget *fichaImagen = matrizImagenes[filOrigen][colOrigen];/*agarramos el puntero de imagen a esa zona*/
-    gtk_fixed_put (contenedor,fichaImagen,x,y);/*lo ponemos en el contenedor en la posicion*/
+
+
+    int pieza = tablero[filOrigen][colOrigen];/*guardamos la pieza para no perderla para escribir la bitacora*/
+
+    char fichac[15];
+    sprintf(fichac, "%d.png", pieza);
+    GtkWidget *nuevaImagen = gtk_image_new ();/*creamos la imagen en blanco*/
+    gtk_image_set_from_file (nuevaImagen,fichac);/*la cargamos del filename*/
+    gtk_image_clear(fichaImagen);
+
+    gtk_fixed_put (contenedor,nuevaImagen,x,y);/*lo ponemos en el contenedor en la posicion.*/
     gtk_widget_show (contenedor);/*mostramos el contenedor con todos los widgets*/
     gtk_widget_show_all (mainWindow);
+
+    matrizImagenes[filDestino][colDestino] = nuevaImagen;/*ponemos el puntero de la imagen en su determinada posicion*/
     matrizImagenes[filOrigen][colOrigen] = 0;/*ahora en esa zona de memoria no hay "nada"*/
-    int pieza = tablero[filOrigen][colOrigen];/*guardamos la pieza para no perderla para escribir la bitacora*/
     tablero[filOrigen][colOrigen] = 0;/*ahora en esa zona de memoria no hay "nada"*/
+    tablero[filDestino][colDestino] = pieza;
     escribeBitacora2(filOrigen, colOrigen, filDestino , colDestino, pieza, gtk_label_get_text (labelJugador));
 }
-
 
 /*solo para debug*/
 void print_array(int a[6][6]) {
@@ -207,7 +240,7 @@ void print_array(int a[6][6]) {
 }
 
 /*escribe en la bitacora un string x*/
-escribeBitacora(char* string){
+void escribeBitacora(char* string){
     FILE *archivo = fopen("Bitacora.txt", "a");
     if (archivo == NULL)
     {
@@ -219,7 +252,7 @@ escribeBitacora(char* string){
     }
 }
 /*escribe en la bitacora, si se puso una pieza*/
-escribeBitacora1(int fil, int col, int pieza, char* jugador){
+void escribeBitacora1(int fil, int col, int pieza, char* jugador){
     FILE *archivo = fopen("Bitacora.txt", "a");
     if (archivo == NULL)
     {
@@ -230,7 +263,7 @@ escribeBitacora1(int fil, int col, int pieza, char* jugador){
        fclose(archivo);
     }
 }
-escribeBitacora2(int fil, int col,int fil1,int col2, int pieza, char* jugador){
+void escribeBitacora2(int fil, int col,int fil1,int col2, int pieza, char* jugador){
     FILE *archivo = fopen("Bitacora.txt", "a");
     if (archivo == NULL)
     {
@@ -240,6 +273,31 @@ escribeBitacora2(int fil, int col,int fil1,int col2, int pieza, char* jugador){
        fprintf(archivo, "%s movio de la fila %d y columna %d una pieza de tipo %d, a una fila %d y columna %d.\n", jugador,fil,col,pieza,fil1,col2);
        fclose(archivo);
     }
+}
+
+/*recibe una letra y le haremos un mapeo*/
+int mapeo (char letra)
+{
+    if(letra == 'a'){
+        return 0;
+    }
+    else if(letra == 'b'){
+        return 1;
+    }
+    else if(letra == 'c'){
+        return 2;
+    }
+    else if(letra == 'd'){
+        return 3;
+    }
+    else if(letra == 'e'){
+        return 4;
+    }
+    else if(letra == 'f'){
+        return 5;
+    }
+    /*invalido*/
+    return 6;
 }
 
 
