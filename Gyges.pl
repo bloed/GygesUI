@@ -105,8 +105,8 @@ tablemoves([nopasado,nopasado,nopasado,nopasado,nopasado,nopasado,
 
 %--------------------Relaciones de los jugadores----------------------------------
 
-player1(p1).
-player2(p2).
+player1(1).
+player2(2).
 
 %--------------------Relaciones de las filas ----------------------------------
 
@@ -169,14 +169,14 @@ gygesAux(Values,Sol,PosActual,PosFinal,Row1,Number):-
 	gygesmove1(Row1,Number,Values,Table,Sol,PosFinal,PosActual,recursion),!.
 
 
-gyges(Values,Sol,PosActual,PosFinal,Turn):-
+gyges(Values,PosActual,PosFinal,Turn):-
 		player1(Turn),!,
 		row1(Values,Row1,Number),
 		rowValues(Row1),!,
 		gygesAux(Values,Sol,PosActualAux,PosFinalAux,Row1,Number),!, 
 		move(PosActualAux,PosActual), move(PosFinalAux,PosFinal),!.
 
-gyges(Values,Sol,PosActual,PosFinal,Turn):-
+gyges(Values,PosActual,PosFinal,Turn):-
 		player2(Turn),!,
 		reverse(Values,RevVal),
 		row1(RevVal,Row1,Number),

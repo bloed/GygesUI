@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "SWI-Prolog.h"
+#include <SWI-Prolog.h>
 #include <gtk/gtk.h>
 /*PROTOTIPOS*/
 int mapeo (char);
