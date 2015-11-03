@@ -3,6 +3,8 @@
 #include <gtk/gtk.h>
 /*PROTOTIPOS*/
 int mapeo (char);
+int verificaEntrada(int, int, int);
+int verificaEntrada2(int, int, int, int);
 
 GtkWidget *mainWindow;/*creamos la pantalla global*/
 GtkWidget *labelJugador;/*será el label que contiene el jugador actual*/
@@ -105,7 +107,6 @@ void juegoPrincipal(int jugadorActual){
     int pieza;
     int fila2;
     int columna2;
-    putImagen(0,0,1);
 
     while (control == 0) {
         while ( gtk_events_pending() ) gtk_main_iteration();
@@ -138,9 +139,14 @@ void juegoPrincipal(int jugadorActual){
                 pieza = (int)movimiento[3]- '0';
                 columna = (int)movimiento[1] - '0';
                 fila = mapeo (movimiento[0]);
-                putImagen(fila,columna,pieza);
-                contador++;
-                siguienteTurno();
+                if (verificaEntrada(fila, columna, pieza) == 1){/*Verificamos formato*/
+                    putImagen(fila,columna,pieza);/*ponemos imagen*/
+                    contador++;
+                    siguienteTurno();/*siguiente del jugador*/
+                }
+                else{
+                    muestraMensaje(mainWindow,"Entrada de datos incorrecta. Siga el ejemplo: a1_2.");
+                }
             }
             else{
                 printf("Qué ficha y a donde la quiere mover:(Ejemplo: a0_f3   esto es mover la pieza en la casilla a0 a f3). \n");
@@ -150,9 +156,13 @@ void juegoPrincipal(int jugadorActual){
                 columna = (int)movimiento[1] - '0';
                 fila2 = mapeo (movimiento[3]);
                 columna2 = (int)movimiento[4] - '0';
-                printf("%d%d_%d%d",fila,columna,fila2,columna2);
-                moveImagen(fila, columna, fila2, columna2);
-                siguienteTurno();
+                if(verificaEntrada2(fila, columna, fila2, columna2)==1){/*verificamos formato*/
+                    moveImagen(fila, columna, fila2, columna2);/*movemos ficha*/
+                    siguienteTurno();/*turno del siguiente jugador*/
+                }
+                else{
+                    muestraMensaje(mainWindow,"Entrada de datos incorrecta. Siga el ejemplo: a0_f3.");
+                }
             }
         }
         else
@@ -251,6 +261,7 @@ void escribeBitacora(char* string){
        fclose(archivo);
     }
 }
+
 /*escribe en la bitacora, si se puso una pieza*/
 void escribeBitacora1(int fil, int col, int pieza, char* jugador){
     FILE *archivo = fopen("Bitacora.txt", "a");
@@ -263,6 +274,7 @@ void escribeBitacora1(int fil, int col, int pieza, char* jugador){
        fclose(archivo);
     }
 }
+
 void escribeBitacora2(int fil, int col,int fil1,int col2, int pieza, char* jugador){
     FILE *archivo = fopen("Bitacora.txt", "a");
     if (archivo == NULL)
@@ -300,4 +312,24 @@ int mapeo (char letra)
     return 6;
 }
 
+/*Verifica que una entrada sea valida*/
+int verificaEntrada(int fil, int col, int pieza){
+    /*hay que verificar que etanto fila, columna son numeros entre 5 y 0, y la pieza entre 1 y 3*/
+    if((fil>=0 && fil<=5)&&(col>=0 && col<=5)&&(pieza>=1 && pieza<=3)){
+        return 1;/*movimiento valido*/
+    }
+    else{
+        return 2;
+    }
+}
+
+int verificaEntrada2(int fil, int col, int fil2, int col2){
+    /*hay que verificar que etanto filas, columnas son numeros entre 5 y 0,*/
+    if((fil>=0 && fil<=5)&&(col>=0 && col<=5)&&(fil2>=0 && fil2<=5)&&(col2>=0 && col2<=5)){
+        return 1;/*movimiento valido*/
+    }
+    else{
+        return 2;
+    }
+}
 
