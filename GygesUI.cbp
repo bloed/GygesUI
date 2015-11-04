@@ -29,24 +29,29 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-mms-bitfields" />
 			<Add option="-Wall" />
-			<Add directory="C:/gtk - 2.24/include" />
-			<Add directory="C:/gtk - 2.24/include/gtk-2.0" />
-			<Add directory="C:/gtk - 2.24/include/cairo" />
-			<Add directory="C:/gtk - 2.24/include/gdk" />
-			<Add directory="C:/gtk - 2.24/include/glib-2.0" />
-			<Add directory="C:/gtk - 2.24/lib/glib-2.0/include" />
-			<Add directory="C:/gtk - 2.24/include/pango-1.0" />
-			<Add directory="C:/gtk - 2.24/lib/gtk-2.0/include" />
-			<Add directory="C:/gtk - 2.24/include/atk-1.0" />
-			<Add directory="C:/gtk - 2.24/include/gdk-pixbuf-2.0" />
+			<Add option="-mms-bitfields" />
+			<Add directory="C:/gtk-2.24/include" />
+			<Add directory="C:/gtk-2.24/include/gtk-2.0" />
+			<Add directory="C:/gtk-2.24/include/cairo" />
+			<Add directory="C:/gtk-2.24/include/gdk" />
+			<Add directory="C:/gtk-2.24/include/glib-2.0" />
+			<Add directory="C:/gtk-2.24/lib/glib-2.0/include" />
+			<Add directory="C:/gtk-2.24/include/pango-1.0" />
+			<Add directory="C:/gtk-2.24/lib/gtk-2.0/include" />
+			<Add directory="C:/gtk-2.24/include/atk-1.0" />
+			<Add directory="C:/gtk-2.24/include/gdk-pixbuf-2.0" />
+			<Add directory="C:/Program Files (x86)/swipl/lib" />
+			<Add directory="C:/Program Files (x86)/swipl/include" />
 		</Compiler>
 		<Linker>
 			<Add library="gtk-win32-2.0" />
 			<Add library="gobject-2.0" />
 			<Add library="glib-2.0" />
-			<Add directory="C:/gtk - 2.24/lib" />
+			<Add library="C:\Program Files (x86)\swipl\lib\libswipl.dll.a" />
+			<Add library="C:\Program Files (x86)\swipl\lib\libswipl.lib" />
+			<Add library="C:\Program Files (x86)\swipl\lib\plterm.dll.a" />
+			<Add directory="C:/gtk-2.24/lib" />
 		</Linker>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />

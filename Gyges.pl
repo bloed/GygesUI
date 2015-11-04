@@ -106,7 +106,7 @@ tablemoves([nopasado,nopasado,nopasado,nopasado,nopasado,nopasado,
 %--------------------Relaciones de los jugadores----------------------------------
 
 player1(1).
-player2(2).
+player2(0).
 
 %--------------------Relaciones de las filas ----------------------------------
 
@@ -160,20 +160,45 @@ changeValues([Head|Tail],Number, Val, [Head|Tail2]):- Number2 is Number - 1,
 
 %--------------------Auxiliar para encontrar 1's y 0's del AI----------------------------------
 
-gygesAux(Values,Sol,PosActual,PosFinal,Row1,Number):-
+gygesAux(Values,Sol,PosActual,PosFinal,Row1,Number,ai):-
 	tablemoves(Table),
-	gygesmove1(Row1,Number,Values,Table,Sol,PosFinal,PosActual,find1),!.
+	gygesmove1(Row1,Number,Values,Table,Sol,PosFinal,PosActual,find1,ai),!.
 
-gygesAux(Values,Sol,PosActual,PosFinal,Row1,Number):-
+gygesAux(Values,Sol,PosActual,PosFinal,Row1,Number,ai):-
 	tablemoves(Table),
-	gygesmove1(Row1,Number,Values,Table,Sol,PosFinal,PosActual,recursion),!.
+	gygesmove1(Row1,Number,Values,Table,Sol,PosFinal,PosActual,recursion,ai),!.
 
+gygesAux(Values,Sol,PosActual,PosFinal,Row1,Number,ai):-
+	tablemoves(Table),
+	gygesmove1(Row1,Number,Values,Table,Sol,PosFinal,PosActual,findany,ai),!.
+
+gygesAux(Values,Sol,PosActual,PosFinal,Row1,Number,verify):-
+	tablemoves(Table),
+	gygesmove1(Row1,Number,Values,Table,Sol,PosFinal,PosActual,verify,ver).
+
+gygesVerify(Values,PosActual,PosFinal,Turn,Value):-
+		player1(Turn),!,
+		row1(Values,Row1,Number),
+		rowValues(Row1),!,
+		gygesAux(Values,Sol,PosActualAux,PosFinalAux,Row1,Number,verify), 
+		move(PosActualAux,PosActual), move(PosFinalAux,PosFinal),!,Value is 1.
+
+gygesVerify(Values,PosActual,PosFinal,Turn,Value):-
+		player2(Turn),!,
+		reverse(Values,RevVal),
+		row1(RevVal,Row1,Number),
+		rowValues(Row1),!,
+		gygesAux(RevVal,RevSol,RevPosActual,RevPosFinal,Row1,Number,verify),
+		reverse(RevSol,Sol), complemento(RevPosActual,PosActualAux), complemento(RevPosFinal,PosFinalAux)
+		,move(PosActualAux,PosActual), move(PosFinalAux,PosFinal),!,Value is 1.
+
+gygesVerify(Values,PosActual,PosFinal,Turn,0).
 
 gyges(Values,PosActual,PosFinal,Turn):-
 		player1(Turn),!,
 		row1(Values,Row1,Number),
 		rowValues(Row1),!,
-		gygesAux(Values,Sol,PosActualAux,PosFinalAux,Row1,Number),!, 
+		gygesAux(Values,Sol,PosActualAux,PosFinalAux,Row1,Number,ai),!, 
 		move(PosActualAux,PosActual), move(PosFinalAux,PosFinal),!.
 
 gyges(Values,PosActual,PosFinal,Turn):-
@@ -181,15 +206,16 @@ gyges(Values,PosActual,PosFinal,Turn):-
 		reverse(Values,RevVal),
 		row1(RevVal,Row1,Number),
 		rowValues(Row1),!,
-		gygesAux(RevVal,RevSol,RevPosActual,RevPosFinal,Row1,Number),!,
+		gygesAux(RevVal,RevSol,RevPosActual,RevPosFinal,Row1,Number,ai),!,
 		reverse(RevSol,Sol), complemento(RevPosActual,PosActualAux), complemento(RevPosFinal,PosFinalAux),!
 		,move(PosActualAux,PosActual), move(PosFinalAux,PosFinal),!.
+	
 
 %--------------------Relacion de control del movimiento del contrario en mi turno----------------------------------
 
 gygesAdvAux(RevVal,Row1,Number):-
 	tablemoves(Table),
-	gygesmove1(Row1,Number,RevVal,Table,Sol,PosFinal,PosActual,find1),!,fail.
+	gygesmove1(Row1,Number,RevVal,Table,Sol,PosFinal,PosActual,find1,ai),!,fail.
 
 gygesAdvAux(RevVal,Row1,Number):-!.
 
@@ -204,20 +230,22 @@ gygesAdversary(_,_,0).
 
 %--------------------Relacion que encuentra una posicion y valores en una fila, llama a todas ls jugadas de esa fila----------------------------------
 
-gygesmove1([],_,_,_,_,_,_,_):- !,fail.
+gygesmove1([],_,_,_,_,_,_,_,_):- !,fail.
 
-gygesmove1([f0|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type):- Number2 is Number + 1, 								
-								gygesmove1(Tail,Number2,Values,Table,Sol,PosFinal,PosInicial,Type).
-								
-									
-gygesmove1([f1|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type):- gygesplay(Values,Number,Table, 1, Sol,f1,Type,f0,PosFinal), PosInicial is Number,!.
-gygesmove1([f1|Tail],Number,Values,Table,Sol,PosFinal ,PosInicial,Type):- Number2 is Number + 1, gygesmove1(Tail,Number2,Values,Table,Sol,PosFinal,PosInicial,Type).
+gygesmove1([f0|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type,Type2):- Number2 is Number + 1, 								
+								gygesmove1(Tail,Number2,Values,Table,Sol,PosFinal,PosInicial,Type,Type2).
+																	
+gygesmove1([f1|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type,ai):- gygesplay(Values,Number,Table, 1, Sol,f1,Type,f0,PosFinal), PosInicial is Number,!.
+gygesmove1([f1|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type,ver):- gygesplay(Values,Number,Table, 1, Sol,f1,verify,f0,PosFinal), PosInicial is Number.
+gygesmove1([f1|Tail],Number,Values,Table,Sol,PosFinal ,PosInicial,Type,Type2):- Number2 is Number + 1, gygesmove1(Tail,Number2,Values,Table,Sol,PosFinal,PosInicial,Type,Type2).
 
-gygesmove1([f2|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type):- gygesplay(Values,Number,Table, 2, Sol,f2,Type,f0,PosFinal), PosInicial is Number,!.
-gygesmove1([f2|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type):- Number2 is Number + 1, gygesmove1(Tail,Number2,Values,Table,Sol,PosFinal,PosInicial,Type).
+gygesmove1([f2|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type,ai):- gygesplay(Values,Number,Table, 2, Sol,f2,Type,f0,PosFinal), PosInicial is Number,!.
+gygesmove1([f2|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type,ver):- gygesplay(Values,Number,Table, 2, Sol,f2,verify,f0,PosFinal), PosInicial is Number.
+gygesmove1([f2|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type,Type2):- Number2 is Number + 1, gygesmove1(Tail,Number2,Values,Table,Sol,PosFinal,PosInicial,Type,Type2).
 
-gygesmove1([f3|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type):- gygesplay(Values,Number,Table, 3, Sol,f3,Type,f0,PosFinal), PosInicial is Number,!.
-gygesmove1([f3|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type):- Number2 is Number + 1, gygesmove1(Tail,Number2,Values,Table,Sol,PosFinal,PosInicial,Type).
+gygesmove1([f3|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type,ai):- gygesplay(Values,Number,Table, 3, Sol,f3,Type,f0,PosFinal), PosInicial is Number,!.
+gygesmove1([f3|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type,ver):- gygesplay(Values,Number,Table, 3, Sol,f3,verify,f0,PosFinal), PosInicial is Number.
+gygesmove1([f3|Tail],Number,Values,Table,Sol,PosFinal,PosInicial,Type,Type2):- Number2 is Number + 1, gygesmove1(Tail,Number2,Values,Table,Sol,PosFinal,PosInicial,Type,Type2).
 
 
 %--------------------Relacion que se encarga de todas las extensiones del arbol de una sola ficha----------------------------------
@@ -241,6 +269,8 @@ gygesplay(Values,PosActual,Moves,0,ValuesFin,InitVal,recursion,SavedFicha,PosAct
 gygesAdversary(ValuesFin),!.
 
 gygesplay(Values, PosActual, Moves, Count, Values,InitVal,find1,SavedFicha,37):- Count = 1, win(PosActual),!.
+gygesplay(Values, PosActual, Moves, 0, Values,InitVal,findany,SavedFicha,PosActual):-changeValues(Values,PosActual,InitVal,ValuesFin),!.
+gygesplay(Values, PosActual, Moves, 0, Values,InitVal,verify,SavedFicha,PosActual):-changeValues(Values,PosActual,InitVal,ValuesFin).
 
 
 %-----------------------------------------------------------------------------------------------------------------------------
@@ -267,7 +297,7 @@ gygesplaychange(Values,PosActual,Moves,Count,WinnerTable,FindPos,InitVal,Type,Sa
 %Disculpe por el siguiente codigo, debido a la entrega de resumenes esta misma fecha no tuve tiempo suficiente 
 %para hacer esta parte correctamente...
 
-move(0,win).
+move(0,w0).
 move(1,a0).
 move(2,a1).
 move(3,a2).
@@ -304,7 +334,7 @@ move(33,f2).
 move(34,f3).
 move(35,f4).
 move(36,f5).
-move(37,win).
+move(37,w0).
 
 %----------------------------------------------------------------------------------------------------------------
 
