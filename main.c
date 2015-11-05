@@ -1,11 +1,55 @@
 #include <stdlib.h>
 #include <SWI-Prolog.h>
 #include <gtk/gtk.h>
+/*
+%Instituto Tecnológico Costa Rica
+%Escuela de Computación - Carrera Ingienría de computacion
+%Lenguajes de programacion
+%Grupo 01
+%Tarea corta  C
+%Estudiante: Josué Arrieta Salas
+%Carne: 2014008153
+%Profesor: Kirstein Gätjens Soto
+%Fecha: 16/10/2015
+%Funcion: Crear una interfaz para el juego gyges
+
+
+Manual de USO: Seguir las reglas de que están en : Manual para compilar.pdf
+Una vez compilado el programa:
+Todas las inttrucciones serán por la consola:
+0 salir
+1 para jugar IA (es automático)
+2 para jugar persona. Si es en fase de poner fichas se utiliza el siguiente formato:
+A) posicionCasilla_Tipo de de ficha. EJ:a0_3 donde en la casilla a3 se pondrá una ficha de 3
+Si es en la fase ya de juego sería:
+B) casillaOrigen_casillaDestino. Ej a0_b0. Esto sería mover lo que este en la casilla a0 a la b0.
+
+NOTA: hay validacion de formato y de movimientos
+
+
+
+
+%ANALISIS DE RESULTADOS (A):
+%_______________________________________________________________________________________________
+%                    FUNCIONALIDAD                                     |  CRITERO DE ÉXITO     |
+%______________________________________________________________________|_______________________|
+%-Movimientos válidos por todo el tablero                              | A completado con éxito|
+%-Puede jugar tanto IA como persona                                    | A completado con éxito|
+%-Se realiza una hermosa interfaz                                      | A completado con éxito|
+%-Se puede indicar quien comienza                                      | A completado con éxito|
+%-Se simula una partida de Gyges sin problema                          | A completado con éxito|
+%-Se crea y se escribe en la bitacor___________________________________| A completado con éxito|
+
+
+
+*/
+
 /*PROTOTIPOS*/
 int mapeo (char);
 int verificaEntrada(int, int, int);
 int verificaEntrada2(int, int, int, int);
 char* intToF(int);
+char mapeoAlReves (int);
 
 
 GtkWidget *mainWindow;/*creamos la pantalla global*/
@@ -128,6 +172,10 @@ void jugadaAi(int jugador){
         PL_get_atom_chars(t+2, &newMove);
         printf("Casilla actual %s.\n", actual);
         printf("Nueva casilla %s.\n", newMove);
+        char buffer[100];
+        snprintf(buffer, sizeof(buffer), "Se movio de la casilla %s, a la casilla %s", actual, newMove);
+        char* p = &buffer[0];
+        muestraMensaje(mainWindow,p);/*mandamos un puntero al comienzo del array*/
     }
     PL_close_query(query);
 }
@@ -370,18 +418,6 @@ moveImagen(int filOrigen, int colOrigen, int filDestino, int colDestino){
     escribeBitacora2(filOrigen, colOrigen, filDestino , colDestino, pieza, gtk_label_get_text (labelJugador));
 }
 
-/*solo para debug*/
-void print_array(int a[6][6]) {
-   int i, j;
-   /* print each row of the array */
-   for (i = 0; i < 6; i++) {
-      for (j = 0; j < 6; j++)
-         printf("%6i ", a[i][j]);
-          /* must add newline at end */
-      printf("\n");
-   }
-   printf("\n");
-}
 
 /*escribe en la bitacora un string x*/
 void escribeBitacora(char* string){
@@ -399,24 +435,27 @@ void escribeBitacora(char* string){
 /*escribe en la bitacora, si se puso una pieza*/
 void escribeBitacora1(int fil, int col, int pieza, char* jugador){
     FILE *archivo = fopen("Bitacora.txt", "a");
+    char filac = mapeoAlReves(fil);
     if (archivo == NULL)
     {
         printf("Error!\n");
     }
     else{
-       fprintf(archivo, "%s puso una pieza en la fila %d y columna %d, la pieza era de tipo %d.\n", jugador,fil,col,pieza);
+       fprintf(archivo, "%s puso una pieza en la casilla %c%d, la pieza era de tipo %d.\n", jugador,filac,col,pieza);
        fclose(archivo);
     }
 }
 
 void escribeBitacora2(int fil, int col,int fil1,int col2, int pieza, char* jugador){
     FILE *archivo = fopen("Bitacora.txt", "a");
+    char fil1c = mapeoAlReves(fil1);
+    char filc = mapeoAlReves(fil);
     if (archivo == NULL)
     {
         printf("Error!\n");
     }
     else{
-       fprintf(archivo, "%s movio de la fila %d y columna %d una pieza de tipo %d, a una fila %d y columna %d.\n", jugador,fil,col,pieza,fil1,col2);
+       fprintf(archivo, "%s movio una ficha en la casilla %c%d una pieza de tipo %d, a la casilla %c%d.\n", jugador,filc,col,pieza,fil1c,col2);
        fclose(archivo);
     }
 }
@@ -472,6 +511,31 @@ int mapeo (char letra)
     }
     /*invalido*/
     return 6;
+}
+
+/*recibe una entero  le haremos mapeo*/
+char mapeoAlReves (int letra)
+{
+    if(letra == 0){
+        return 'a';
+    }
+    else if(letra == 1){
+        return 'b';
+    }
+    else if(letra == 2){
+        return 'c';
+    }
+    else if(letra == 3){
+        return 'd';
+    }
+    else if(letra == 4){
+        return 'e';
+    }
+    else if(letra == 5){
+        return 'f';
+    }
+    /*invalido*/
+    return 'z';
 }
 
 /*Verifica que una entrada sea valida*/
