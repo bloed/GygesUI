@@ -23,6 +23,7 @@ Todas las inttrucciones serán por la consola:
 A) posicionCasilla_Tipo de de ficha. EJ:a0_3 donde en la casilla a3 se pondrá una ficha de 3
 Si es en la fase ya de juego sería:
 B) casillaOrigen_casillaDestino. Ej a0_b0. Esto sería mover lo que este en la casilla a0 a la b0.
+Si se quiere ganar sería a0_W0
 
 NOTA: hay validacion de formato y de movimientos
 
@@ -278,8 +279,14 @@ void juegoPrincipal(int jugadorActual){
                 /*tiene que hacer ya movimientos tuanis, basado en lo que el usuario escribio*/
                 fila = mapeo(movimiento[0]);
                 columna = (int)movimiento[1] - '0';
-                fila2 = mapeo (movimiento[3]);
-                columna2 = (int)movimiento[4] - '0';
+                if (fila2 !='W'){
+                    fila2 = mapeo (movimiento[3]);
+                    columna2 = (int)movimiento[4] - '0';
+                }
+                else{
+                    fila2=0;/*es solo para que pase el formato :)*/
+                    columna2 = 0;
+                }
                 actualU[0] = movimiento[0];
                 actualU[1] = movimiento[1];
                 actualU[2] =  0;
@@ -551,6 +558,7 @@ int verificaEntrada(int fil, int col, int pieza){
 
 int verificaEntrada2(int fil, int col, int fil2, int col2){
     /*hay que verificar que etanto filas, columnas son numeros entre 5 y 0,*/
+
     if((fil>=0 && fil<=5)&&(col>=0 && col<=5)&&(fil2>=0 && fil2<=5)&&(col2>=0 && col2<=5)){
         return 1;/*movimiento valido*/
     }
