@@ -62,6 +62,7 @@ char* actual;
 char* newMove;
 char actualU[3];
 char newMoveU[3];
+char message[35];
 
 /*gyges([f3,f2,f3,f0,f0,f0,f1,f0,f0,f0,f0,f0,f1,f0,f1,f3,f0,f0,f0,f2,f0,f0,f2,f3,f0,f0,f2,f0,f0,f1,f0,f0,f0,f0,f0,f0],X,Actual,Pasada, p2).*/
 GtkWidget *matrizImagenes[6][6] = {{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0}};/*inicializada en 0*/
@@ -206,15 +207,25 @@ void juegoPrincipal(int jugadorActual){
             if(contador <12){/*estamos en etapas iniciales*/
                 int val=0;
                 while(val==0){
-                    int r =rand()%6;
+                    int r =rand_lim(5);
                     if(jugadorActual == 0 && tablero[5][r]==0){
                         tablero[5][r] = ficha_init;
                         val = 1;
+                        strcpy(message,"Se puso la ficha inicial en: ");
+                        message[28] = 'f';
+                        message[29] = r+ 48;
+                        message[30] = 0;
+                        muestraMensaje(mainWindow,message);
                         putImagen(5,r,ficha_init);
                     }
                     if(jugadorActual == 1 && tablero[0][r]==0){
                         tablero[0][r] = ficha_init;
                         val = 1;
+                        strcpy(message,"Se puso la ficha inicial en: ");
+                        message[28] = 'a';
+                        message[29] = r+ 48;
+                        message[30] = 0;
+                        muestraMensaje(mainWindow,message);
                         putImagen(0,r,ficha_init);
                     }
                 }
@@ -225,6 +236,12 @@ void juegoPrincipal(int jugadorActual){
                 }
 
                 contador++;
+                siguienteTurno();
+                if(jugadorActual ==0)
+                    jugadorActual =1;
+                else{
+                    jugadorActual =0;
+                }
             }
             else{
                 /*tiene que hacer ya movimientos tuanis*/
@@ -232,21 +249,24 @@ void juegoPrincipal(int jugadorActual){
                 jugadaAi(jugadorActual);
                 fila = mapeo(actual[0]);
                 columna = (int)actual[1] - '0';
-                if(newMove[0]=='w'){
-                     printf("ganoAI!");
-                }
                 fila2 = mapeo (newMove[0]);
                 columna2 = (int)newMove[1] - '0';
 
-
-                moveImagen(fila, columna, fila2, columna2);
-
-            }
-            siguienteTurno();
-            if(jugadorActual ==0)
-                jugadorActual =1;
-            else{
-                jugadorActual =0;
+                if(newMove[0]=='w'){
+                     strcpy(message,"La AI ha ganado! Con la ficha: ");
+                     message[31] = actual[0];
+                     message[32] = actual[1];
+                     message[33] = 0;
+                     muestraMensaje(mainWindow,message);
+                }else{
+                    moveImagen(fila, columna, fila2, columna2);
+                    siguienteTurno();
+                    if(jugadorActual ==0)
+                        jugadorActual =1;
+                    else{
+                        jugadorActual =0;
+                    }
+                }
             }
         }
         else if(strcmp(desicion,"2") ==0){/*juega Humano*/
@@ -274,39 +294,26 @@ void juegoPrincipal(int jugadorActual){
                 }
             }
             else{
-                printf("Qué ficha y a donde la quiere mover:(Ejemplo: a0_f3   esto es mover la pieza en la casilla a0 a f3). \n");
+                printf("Qué ficha y a donde la quiere mover:(Ejemplo: a0_f3   esto es mover la pieza en la casilla a0 a f3, para ganar ponga como ultima ficha w0). \n");
                 scanf("%s", &movimiento);
                 /*tiene que hacer ya movimientos tuanis, basado en lo que el usuario escribio*/
                 fila = mapeo(movimiento[0]);
                 columna = (int)movimiento[1] - '0';
-                if (fila2 !='W'){
-                    fila2 = mapeo (movimiento[3]);
-                    columna2 = (int)movimiento[4] - '0';
+                if (movimiento[3] =='W'){
+                    muestraMensaje(mainWindow,"El usuario acaba de declarar que ha ganado! Felicidades!");
                 }
                 else{
-                    fila2=0;/*es solo para que pase el formato :)*/
-                    columna2 = 0;
-                }
-                actualU[0] = movimiento[0];
-                actualU[1] = movimiento[1];
-                actualU[2] =  0;
-                newMoveU[0] = movimiento[3];
-                newMoveU[1] = movimiento[4];
-                newMoveU[2] = 0;
+                    fila2 = mapeo (movimiento[3]);
+                    columna2 = (int)movimiento[4] - '0';
+                    actualU[0] = movimiento[0];
+                    actualU[1] = movimiento[1];
+                    actualU[2] =  0;
+                    newMoveU[0] = movimiento[3];
+                    newMoveU[1] = movimiento[4];
+                    newMoveU[2] = 0;
 
-                if(verificaEntrada2(fila, columna, fila2, columna2)==1){/*verificamos formato*/
-                    if(validarMov(jugadorActual)){
-                        moveImagen(fila, columna, fila2, columna2);/*movemos ficha*/
-                        siguienteTurno();/*turno del siguiente jugador*/
-                        if(jugadorActual ==0)
-                            jugadorActual =1;
-                        else{
-                            jugadorActual =0;
-                        }
-                    }else{
-                        printf("El movimiento que realizo no se considera valido. Digite 1 para aceptar el movimiento o 2 para cancelarlo. \n");
-                        scanf("%s", &desicion);
-                        if(strcmp(desicion,"1") == 0){
+                    if(verificaEntrada2(fila, columna, fila2, columna2)==1){/*verificamos formato*/
+                        if(validarMov(jugadorActual)){
                             moveImagen(fila, columna, fila2, columna2);/*movemos ficha*/
                             siguienteTurno();/*turno del siguiente jugador*/
                             if(jugadorActual ==0)
@@ -314,11 +321,23 @@ void juegoPrincipal(int jugadorActual){
                             else{
                                 jugadorActual =0;
                             }
+                        }else{
+                            printf("El movimiento que realizo no se considera valido. Digite 1 para aceptar el movimiento o 2 para cancelarlo. \n");
+                            scanf("%s", &desicion);
+                            if(strcmp(desicion,"1") == 0){
+                                moveImagen(fila, columna, fila2, columna2);/*movemos ficha*/
+                                siguienteTurno();/*turno del siguiente jugador*/
+                                if(jugadorActual ==0)
+                                    jugadorActual =1;
+                                else{
+                                    jugadorActual =0;
+                                }
+                            }
                         }
                     }
-                }
-                else{
+                    else{
                     muestraMensaje(mainWindow,"Entrada de datos incorrecta. Siga el ejemplo: a0_f3.");
+                    }
                 }
             }
         }
@@ -327,6 +346,20 @@ void juegoPrincipal(int jugadorActual){
             muestraMensaje(mainWindow,"Opcion incorrecta. Solo existen 3 opciones: 0 ,1 y 2.");
         }
     }
+}
+
+int rand_lim(int limit) {
+/* return a random number between 0 and limit inclusive.
+ */
+
+    int divisor = RAND_MAX/(limit+1);
+    int retval;
+
+    do {
+        retval = rand() / divisor;
+    } while (retval > limit);
+
+    return retval;
 }
 
 int init_valido(int fil, int col, int ficha, int turno){
