@@ -23,7 +23,7 @@ Todas las inttrucciones serán por la consola:
 A) posicionCasilla_Tipo de de ficha. EJ:a0_3 donde en la casilla a3 se pondrá una ficha de 3
 Si es en la fase ya de juego sería:
 B) casillaOrigen_casillaDestino. Ej a0_b0. Esto sería mover lo que este en la casilla a0 a la b0.
-Si se quiere ganar sería a0_W0
+Si se quiere ganar sería a0_w0
 
 NOTA: hay validacion de formato y de movimientos
 
@@ -299,19 +299,27 @@ void juegoPrincipal(int jugadorActual){
                 /*tiene que hacer ya movimientos tuanis, basado en lo que el usuario escribio*/
                 fila = mapeo(movimiento[0]);
                 columna = (int)movimiento[1] - '0';
-                if (movimiento[3] =='W'){
-                    muestraMensaje(mainWindow,"El usuario acaba de declarar que ha ganado! Felicidades!");
+                fila2 = mapeo (movimiento[3]);
+                columna2 = (int)movimiento[4] - '0';
+                actualU[0] = movimiento[0];
+                actualU[1] = movimiento[1];
+                actualU[2] =  0;
+                newMoveU[0] = movimiento[3];
+                newMoveU[1] = movimiento[4];
+                newMoveU[2] = 0;
+
+                if (movimiento[3] =='w'){
+                    if(validarMov(jugadorActual)){
+                        muestraMensaje(mainWindow,"El usuario acaba de declarar que ha ganado! Felicidades!");
+                    }else{
+                        printf("El movimiento que realizo no se considera valido. Digite 1 para aceptar el movimiento o 2 para cancelarlo. \n");
+                        scanf("%s", &desicion);
+                        if(strcmp(desicion,"1") == 0){
+                            muestraMensaje(mainWindow,"El usuario acaba de declarar que ha ganado! Felicidades!");
+                        }
+                    }
                 }
                 else{
-                    fila2 = mapeo (movimiento[3]);
-                    columna2 = (int)movimiento[4] - '0';
-                    actualU[0] = movimiento[0];
-                    actualU[1] = movimiento[1];
-                    actualU[2] =  0;
-                    newMoveU[0] = movimiento[3];
-                    newMoveU[1] = movimiento[4];
-                    newMoveU[2] = 0;
-
                     if(verificaEntrada2(fila, columna, fila2, columna2)==1){/*verificamos formato*/
                         if(validarMov(jugadorActual)){
                             moveImagen(fila, columna, fila2, columna2);/*movemos ficha*/
@@ -523,6 +531,7 @@ int validarMov(int jugador){
     int boolean = 0;
     if(result){
         PL_get_integer(t+4, &boolean);
+
     }
     PL_close_query(query);
     return boolean;

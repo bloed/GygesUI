@@ -183,3 +183,110 @@ Cielo movio una ficha en la casilla b2 una pieza de tipo 1, a la casilla c2.
 Infierno movio una ficha en la casilla f1 una pieza de tipo 1, a la casilla e1.
 Cielo movio una ficha en la casilla b4 una pieza de tipo 1, a la casilla f4.
 Infierno movio una ficha en la casilla f4 una pieza de tipo 1, a la casilla e4.
+------Nuevo Juego------
+Infierno puso una pieza en la casilla f0, la pieza era de tipo 1.
+Cielo puso una pieza en la casilla a3, la pieza era de tipo 2.
+Infierno puso una pieza en la casilla f1, la pieza era de tipo 3.
+Cielo puso una pieza en la casilla a4, la pieza era de tipo 1.
+Infierno puso una pieza en la casilla f3, la pieza era de tipo 2.
+Cielo puso una pieza en la casilla a2, la pieza era de tipo 3.
+Infierno puso una pieza en la casilla f2, la pieza era de tipo 1.
+Cielo puso una pieza en la casilla a5, la pieza era de tipo 2.
+Infierno puso una pieza en la casilla f4, la pieza era de tipo 3.
+Cielo puso una pieza en la casilla a1, la pieza era de tipo 1.
+Infierno puso una pieza en la casilla f5, la pieza era de tipo 2.
+Cielo puso una pieza en la casilla a0, la pieza era de tipo 3.
+Infierno movio una ficha en la casilla f5 una pieza de tipo 2, a la casilla d5.
+Cielo movio una ficha en la casilla a0 una pieza de tipo 3, a la casilla c1.
+Infierno movio una ficha en la casilla f1 una pieza de tipo 3, a la casilla e3.
+Cielo movio una ficha en la casilla a5 una pieza de tipo 2, a la casilla c5.
+Infierno movio una ficha en la casilla f0 una pieza de tipo 1, a la casilla f1.
+------Nuevo Juego------
+Infierno puso una pieza en la casilla f0, la pieza era de tipo 1.
+Cielo puso una pieza en la casilla a3, la pieza era de tipo 2.
+Infierno puso una pieza en la casilla f1, la pieza era de tipo 3.
+Cielo puso una pieza en la casilla a4, la pieza era de tipo 1.
+Infierno puso una pieza en la casilla f3, la pieza era de tipo 2.
+Cielo puso una pieza en la casilla a2, la pieza era de tipo 3.
+Infierno puso una pieza en la casilla f2, la pieza era de tipo 1.
+Cielo puso una pieza en la casilla a5, la pieza era de tipo 2.
+Infierno puso una pieza en la casilla f4, la pieza era de tipo 3.
+Cielo puso una pieza en la casilla a1, la pieza era de tipo 1.
+Infierno puso una pieza en la casilla f5, la pieza era de tipo 2.
+Cielo puso una pieza en la casilla a0, la pieza era de tipo 3.
+------Nuevo Juego------
+Infierno puso una pieza en la casilla f0, la pieza era de tipo 1.
+Cielo puso una pieza en la casilla a3, la pieza era de tipo 2.
+Infierno puso una pieza en la casilla f1, la pieza era de tipo 3.
+Cielo puso una pieza en la casilla a4, la pieza era de tipo 1.
+Infierno puso una pieza en la casilla f3, la pieza era de tipo 2.
+Cielo puso una pieza en la casilla a2, la pieza era de tipo 3.
+Infierno puso una pieza en la casilla f2, la pieza era de tipo 1.
+Cielo puso una pieza en la casilla a5, la pieza era de tipo 2.
+Infierno puso una pieza en la casilla f4, la pieza era de tipo 3.
+Cielo puso una pieza en la casilla a1, la pieza era de tipo 1.
+Infierno puso una pieza en la casilla f5, la pieza era de tipo 2.
+Cielo puso una pieza en la casilla a0, la pieza era de tipo 3.
+------Nuevo Juego------
+Infierno puso una pieza en la casilla f0, la pieza era de tipo 1.
+Cielo puso una pieza en la casilla a3, la pieza era de tipo 2.
+Infierno puso una pieza en la casilla f1, la pieza era de tipo 3.
+Cielo puso una pieza en la casilla a4, la pieza era de tipo 1.
+Infierno puso una pieza en la casilla f3, la pieza era de tipo 2.
+Cielo puso una pieza en la casilla a2, la pieza era de tipo 3.
+Infierno puso una pieza en la casilla f2, la pieza era de tipo 1.
+Cielo puso una pieza en la casilla a5, la pieza era de tipo 2.
+Infierno puso una pieza en la casilla f4, la pieza era de tipo 3.
+Cielo puso una pieza en la casilla a1, la pieza era de tipo 1.
+Infierno puso una pieza en la casilla f5, la pieza era de tipo 2.
+Cielo puso una pieza en la casilla a0, la pieza era de tipo 3.
+------Nuevo Juego------
+Infierno puso una pieza en la casilla f0, la pieza era de tipo 1.
+Cielo puso una pieza en la casilla a3, la pieza era de tipo 2.
+Infierno puso una pieza en la casilla f1, la pieza era de tipo 3.
+Cielo puso una pieza en la casilla a4, la pieza era de tipo 1.
+Infierno puso una pieza en la casilla f3, la pieza era de tipo 2.
+Cielo puso una pieza en la casilla a2, la pieza era de tipo 3.
+Infierno puso una pieza en la casilla f2, la pieza era de tipo 1.
+Cielo puso una pieza en la casilla a5, la pieza era de tipo 2.
+Infierno puso una pieza en la casilla f4, la pieza era de tipo 3.
+Cielo puso una pieza en la casilla a1, la pieza era de tipo 1.
+Infierno puso una pieza en la casilla f5, la pieza era de tipo 2.
+Cielo puso una pieza en la casilla a0, la pieza era de tipo 3.
+Infierno movio una ficha en la casilla f5 una pieza de tipo 2, a la casilla d5.
+Cielo movio una ficha en la casilla a0 una pieza de tipo 3, a la casilla c1.
+Infierno movio una ficha en la casilla f1 una pieza de tipo 3, a la casilla d2.
+Cielo movio una ficha en la casilla a1 una pieza de tipo 1, a la casilla b1.
+Infierno movio una ficha en la casilla f0 una pieza de tipo 1, a la casilla f1.
+------Nuevo Juego------
+Infierno puso una pieza en la casilla f0, la pieza era de tipo 1.
+Cielo puso una pieza en la casilla a3, la pieza era de tipo 2.
+Infierno puso una pieza en la casilla f1, la pieza era de tipo 3.
+Cielo puso una pieza en la casilla a4, la pieza era de tipo 1.
+Infierno puso una pieza en la casilla f3, la pieza era de tipo 2.
+Cielo puso una pieza en la casilla a2, la pieza era de tipo 3.
+Infierno puso una pieza en la casilla f2, la pieza era de tipo 1.
+Cielo puso una pieza en la casilla a5, la pieza era de tipo 2.
+Infierno puso una pieza en la casilla f4, la pieza era de tipo 3.
+Cielo puso una pieza en la casilla a1, la pieza era de tipo 1.
+Infierno puso una pieza en la casilla f5, la pieza era de tipo 2.
+Cielo puso una pieza en la casilla a0, la pieza era de tipo 3.
+Infierno movio una ficha en la casilla f5 una pieza de tipo 2, a la casilla d5.
+Cielo movio una ficha en la casilla a0 una pieza de tipo 3, a la casilla c1.
+Infierno movio una ficha en la casilla f1 una pieza de tipo 3, a la casilla e3.
+Cielo movio una ficha en la casilla a1 una pieza de tipo 1, a la casilla b1.
+Infierno movio una ficha en la casilla f0 una pieza de tipo 1, a la casilla f1.
+------Nuevo Juego------
+Infierno puso una pieza en la casilla f0, la pieza era de tipo 1.
+Cielo puso una pieza en la casilla a3, la pieza era de tipo 2.
+Infierno puso una pieza en la casilla f1, la pieza era de tipo 3.
+Cielo puso una pieza en la casilla a4, la pieza era de tipo 1.
+Infierno puso una pieza en la casilla f3, la pieza era de tipo 2.
+Cielo puso una pieza en la casilla a2, la pieza era de tipo 3.
+Infierno puso una pieza en la casilla f2, la pieza era de tipo 1.
+Cielo puso una pieza en la casilla a5, la pieza era de tipo 2.
+Infierno puso una pieza en la casilla f4, la pieza era de tipo 3.
+Cielo puso una pieza en la casilla a1, la pieza era de tipo 1.
+Infierno puso una pieza en la casilla f5, la pieza era de tipo 2.
+Cielo puso una pieza en la casilla a0, la pieza era de tipo 3.
+Infierno movio una ficha en la casilla f0 una pieza de tipo 1, a la casilla e0.

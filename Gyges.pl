@@ -268,6 +268,8 @@ gygesplaychange(Values, PosActual, Moves, 3, WinnerTable, FindPos,InitVal,Type,S
 gygesplay(Values,PosActual,Moves,0,ValuesFin,InitVal,recursion,SavedFicha,PosActual):- changeValues(Values,PosActual,InitVal,ValuesFin), 
 gygesAdversary(ValuesFin),!.
 
+
+gygesplay(Values, PosActual, Moves, Count, Values,InitVal,verify,SavedFicha,37):- Count = 1, win(PosActual).
 gygesplay(Values, PosActual, Moves, Count, Values,InitVal,find1,SavedFicha,37):- Count = 1, win(PosActual),!.
 gygesplay(Values, PosActual, Moves, 0, Values,InitVal,findany,SavedFicha,PosActual):-changeValues(Values,PosActual,InitVal,ValuesFin),!.
 gygesplay(Values, PosActual, Moves, 0, Values,InitVal,verify,SavedFicha,PosActual):-changeValues(Values,PosActual,InitVal,ValuesFin).
